@@ -273,7 +273,7 @@ void CARenderServerRenderDisplay(kern_return_t a, CFStringRef b, IOSurfaceRef su
 
     CGImageRef cgImage = CGImageCreate(width, height, bytesPerComponent * BYTE_SIZE, bytesPerElement * BYTE_SIZE,
                                        bytesPerRow /* already aligned */, colorSpace,
-                                       kCGBitmapByteOrder32Host | kCGImageAlphaNoneSkipFirst, dataProvider, NULL, NO,
+                                       kCGBitmapByteOrder32Little | (CGBitmapInfo)kCGImageAlphaPremultipliedFirst, dataProvider, NULL, NO,
                                        kCGRenderingIntentDefault);
 
     CGDataProviderRelease(dataProvider);
