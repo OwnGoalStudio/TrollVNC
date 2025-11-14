@@ -83,10 +83,8 @@
         [rightBarButtonItems addObject:self.dismissItem];
     }
 
-    if (@available(iOS 16, *)) {
-        if (self.allowShare) {
-            [rightBarButtonItems addObject:self.shareItem];
-        }
+    if (self.allowShare) {
+        [rightBarButtonItems addObject:self.shareItem];
     }
 
     if (self.allowTrash) {

@@ -15,6 +15,7 @@ TrollVNCPrefs_FILES += TVNCListItemsController.m
 TrollVNCPrefs_FILES += TVNCRootListController.m
 TrollVNCPrefs_FILES += TVNCSliderCell.m
 TrollVNCPrefs_FILES += StripedTextTableViewController.m
+TrollVNCPrefs_FILES += ZTSelfSignedCertificate.m
 
 TrollVNCPrefs_CFLAGS += -fobjc-arc
 TrollVNCPrefs_CFLAGS += -DPACKAGE_VERSION=\"$(PACKAGE_VERSION)\"

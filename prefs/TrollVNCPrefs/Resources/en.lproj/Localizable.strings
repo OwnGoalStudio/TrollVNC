@@ -2,6 +2,9 @@
 "%@ rows not loaded" = "%@ rows not loaded";
 
 /* No comment provided by engineer. */
+"A CA private key already exists. Generating new keys will overwrite the existing ones. Are you sure you want to continue?" = "A CA private key already exists. Generating new keys will overwrite the existing ones. Are you sure you want to continue?";
+
+/* No comment provided by engineer. */
 "A new version %@ is available! You’re currently using v%@." = "A new version %1$@ is available! You’re currently using v%2$@.";
 
 /* No comment provided by engineer. */
@@ -38,6 +41,9 @@
 "Cannot parse text with UTF-8 encoding: “%@”." = "Cannot parse text with UTF-8 encoding: “%@”.";
 
 /* No comment provided by engineer. */
+"Certificate Not Found" = "Certificate Not Found";
+
+/* No comment provided by engineer. */
 "Clients" = "Clients";
 
 /* No comment provided by engineer. */
@@ -71,6 +77,21 @@
 "Do you want to clear this log file “%@”?" = "Do you want to clear this log file “%@”?";
 
 /* No comment provided by engineer. */
+"Export Certificate…" = "Export Certificate…";
+
+/* No comment provided by engineer. */
+"Failed to generate self-signed CA certificate." = "Failed to generate self-signed CA certificate.";
+
+/* No comment provided by engineer. */
+"Failed to save generated keys: %@" = "Failed to save generated keys: %@";
+
+/* No comment provided by engineer. */
+"Generation Failed" = "Generation Failed";
+
+/* No comment provided by engineer. */
+"Generation Succeeded" = "Generation Succeeded";
+
+/* No comment provided by engineer. */
 "Invalid Port" = "Invalid Port";
 
 /* No comment provided by engineer. */
@@ -89,6 +110,12 @@
 "OK" = "OK";
 
 /* No comment provided by engineer. */
+"Overwrite" = "Overwrite";
+
+/* No comment provided by engineer. */
+"Overwrite Existing Keys" = "Overwrite Existing Keys";
+
+/* No comment provided by engineer. */
 "Pause Auto Update" = "Pause Auto Update";
 
 /* No comment provided by engineer. */
@@ -105,6 +132,9 @@
 
 /* No comment provided by engineer. */
 "Reverse Connection: %@" = "Reverse Connection: %@";
+
+/* No comment provided by engineer. */
+"Self-signed CA certificate and private key have been generated successfully." = "Self-signed CA certificate and private key have been generated successfully.";
 
 /* No comment provided by engineer. */
 "Skip This Version" = "Skip This Version";
@@ -141,3 +171,6 @@
 
 /* No comment provided by engineer. */
 "Viewer" = "Viewer";
+
+/* No comment provided by engineer. */
+"You need to generate a self-signed CA certificate first before exporting it." = "You need to generate a self-signed CA certificate first before exporting it.";

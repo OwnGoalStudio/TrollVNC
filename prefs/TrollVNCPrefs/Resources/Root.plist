@@ -705,14 +705,6 @@
 			<key>noAutoCorrect</key>
 			<true/>
 		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSButtonCell</string>
-			<key>label</key>
-			<string>Export Certificate…</string>
-			<key>action</key>
-			<string>exportCertificate</string>
-		</dict>
 
 		<!-- SSL Private Key File (advanced) -->
 		<dict>

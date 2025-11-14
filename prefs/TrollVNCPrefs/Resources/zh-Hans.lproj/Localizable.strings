@@ -2,6 +2,9 @@
 "%@ rows not loaded" = "%@ 行未加载";
 
 /* No comment provided by engineer. */
+"A CA private key already exists. Generating new keys will overwrite the existing ones. Are you sure you want to continue?" = "CA 私钥已存在。生成新密钥将覆盖现有密钥。你确定要继续吗？";
+
+/* No comment provided by engineer. */
 "A new version %@ is available! You’re currently using v%@." = "有新版本 %@ 可用！你当前使用的是 v%@。";
 
 /* No comment provided by engineer. */
@@ -38,6 +41,9 @@
 "Cannot parse text with UTF-8 encoding: “%@”." = "无法解析 UTF-8 编码的文本：“%@”。";
 
 /* No comment provided by engineer. */
+"Certificate Not Found" = "未找到证书";
+
+/* No comment provided by engineer. */
 "Clients" = "客户端";
 
 /* No comment provided by engineer. */
@@ -71,6 +77,21 @@
 "Do you want to clear this log file “%@”?" = "你想要清空此日志文件 “%@” 吗？";
 
 /* No comment provided by engineer. */
+"Export Certificate…" = "导出证书…";
+
+/* No comment provided by engineer. */
+"Failed to generate self-signed CA certificate." = "无法生成自签名 CA 证书。";
+
+/* No comment provided by engineer. */
+"Failed to save generated keys: %@" = "无法保存生成的密钥：%@";
+
+/* No comment provided by engineer. */
+"Generation Failed" = "创建失败";
+
+/* No comment provided by engineer. */
+"Generation Succeeded" = "创建成功";
+
+/* No comment provided by engineer. */
 "Invalid Port" = "端口无效";
 
 /* No comment provided by engineer. */
@@ -86,7 +107,13 @@
 "No clients connected" = "没有客户端连接";
 
 /* No comment provided by engineer. */
-"OK" = "好的";
+"OK" = "好";
+
+/* No comment provided by engineer. */
+"Overwrite" = "覆盖";
+
+/* No comment provided by engineer. */
+"Overwrite Existing Keys" = "覆盖现有密钥";
 
 /* No comment provided by engineer. */
 "Pause Auto Update" = "暂停自动更新";
@@ -105,6 +132,9 @@
 
 /* No comment provided by engineer. */
 "Reverse Connection: %@" = "反向连接：%@";
+
+/* No comment provided by engineer. */
+"Self-signed CA certificate and private key have been generated successfully." = "自签名 CA 证书和私钥已成功生成。";
 
 /* No comment provided by engineer. */
 "Skip This Version" = "跳过此版本";
@@ -141,3 +171,6 @@
 
 /* No comment provided by engineer. */
 "Viewer" = "查看器";
+
+/* No comment provided by engineer. */
+"You need to generate a self-signed CA certificate first before exporting it." = "你需要先生成自签名 CA 证书，然后才能导出它。";
