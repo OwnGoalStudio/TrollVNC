@@ -66,6 +66,8 @@
 
 "Establish a reverse connection to a listening VNC viewer or repeater without opening a server port. This is useful for bypassing firewalls or NAT." = "Establish a reverse connection to a listening VNC viewer or repeater without opening a server port. This is useful for bypassing firewalls or NAT.";
 
+"Export Certificate…" = "Export Certificate…";
+
 "Frame Rate" = "Frame Rate";
 
 "Full-access Password" = "Full-access Password";
@@ -73,6 +75,8 @@
 "Fullscreen Threshold (%)" = "Fullscreen Threshold (%)";
 
 "General" = "General";
+
+"Generate CA…" = "Generate CA…";
 
 "HTTP / WebSockets" = "HTTP / WebSockets";
 
@@ -129,6 +133,8 @@
 "Repeater" = "Repeater";
 
 "Repeater ID" = "Repeater ID";
+
+"Reset to Defaults" = "Reset to Defaults";
 
 "Respring" = "Respring";
 
@@ -209,9 +215,5 @@
 "Wheel Tuning" = "Wheel Tuning";
 
 "When dirty rectangles exceed this count, collapse to a bounding box. Too high increases protocol overhead." = "When dirty rectangles exceed this count, collapse to a bounding box. Too high increases protocol overhead.";
-
-"Generate Keys…" = "";
-
-"Reset to Defaults" = "";
 
 "To unblock previously blocked clients, restart the VNC service. The temporary block list is cleared on service restart." = "";

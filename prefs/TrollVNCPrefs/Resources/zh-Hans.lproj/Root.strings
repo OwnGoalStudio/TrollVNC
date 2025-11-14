@@ -66,6 +66,8 @@
 
 "Establish a reverse connection to a listening VNC viewer or repeater without opening a server port. This is useful for bypassing firewalls or NAT." = "建立到监听的 VNC 查看器或中继器的反向连接，而无需打开服务器端口。这对于绕过防火墙或 NAT 非常有用。";
 
+"Export Certificate…" = "导出证书…";
+
 "Frame Rate" = "帧率";
 
 "Full-access Password" = "完全访问密码";
@@ -74,7 +76,7 @@
 
 "General" = "通用";
 
-"Generate Keys…" = "生成密钥…";
+"Generate CA…" = "生成根证书…";
 
 "HTTP / WebSockets" = "HTTP / WebSockets";
 

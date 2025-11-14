@@ -550,27 +550,16 @@ NS_INLINE NSString *TVNCGetEn0IPAddress(void) {
         return [super tableView:tableView cellForRowAtIndexPath:indexPath];
     }
 
-    // Color the last section (support) button blue
-    NSArray *specs = [self specifiers];
-    NSInteger groupCount = 0;
-    for (PSSpecifier *sp in specs) {
-        if ([[sp propertyForKey:@"cell"] isEqualToString:@"PSGroupCell"]) {
-            groupCount++;
-        }
-    }
+    PSSpecifier *specifier = [self specifierAtIndexPath:indexPath];
+    NSString *key = [specifier propertyForKey:@"cell"];
+    if ([key isEqualToString:@"PSButtonCell"]) {
+        UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
 
-    NSInteger lastSection = groupCount - 3; // action group
-    if (indexPath.section >= lastSection) {
-        PSSpecifier *specifier = [self specifierAtIndexPath:indexPath];
-        NSString *key = [specifier propertyForKey:@"cell"];
         BOOL isDestructive =
             ([specifier propertyForKey:@"isDestructive"] && [[specifier propertyForKey:@"isDestructive"] boolValue]);
-        if ([key isEqualToString:@"PSButtonCell"]) {
-            UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
-            cell.textLabel.textColor = isDestructive ? [UIColor systemRedColor] : self.primaryColor;
-            cell.textLabel.highlightedTextColor = isDestructive ? [UIColor systemRedColor] : self.primaryColor;
-            return cell;
-        }
+        cell.textLabel.textColor = isDestructive ? [UIColor systemRedColor] : self.primaryColor;
+        cell.textLabel.highlightedTextColor = isDestructive ? [UIColor systemRedColor] : self.primaryColor;
+        return cell;
     }
 
     return [super tableView:tableView cellForRowAtIndexPath:indexPath];

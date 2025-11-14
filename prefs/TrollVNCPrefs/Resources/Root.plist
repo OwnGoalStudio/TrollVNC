@@ -705,6 +705,14 @@
 			<key>noAutoCorrect</key>
 			<true/>
 		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>label</key>
+			<string>Export Certificate…</string>
+			<key>action</key>
+			<string>exportCertificate</string>
+		</dict>
 
 		<!-- SSL Private Key File (advanced) -->
 		<dict>
@@ -728,6 +736,14 @@
 			<string>/path/to/key.pem</string>
 			<key>noAutoCorrect</key>
 			<true/>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>label</key>
+			<string>Generate CA…</string>
+			<key>action</key>
+			<string>generateKeys</string>
 		</dict>
 
 		<!-- Reverse Connection -->
@@ -858,14 +874,6 @@
 			<string></string>
 			<key>footerText</key>
 			<string>To unblock previously blocked clients, restart the VNC service. The temporary block list is cleared on service restart.</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSButtonCell</string>
-			<key>label</key>
-			<string>Generate Keys…</string>
-			<key>action</key>
-			<string>generateKeys</string>
 		</dict>
 		<dict>
 			<key>cell</key>
