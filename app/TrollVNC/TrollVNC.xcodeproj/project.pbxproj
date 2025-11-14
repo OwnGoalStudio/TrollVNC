@@ -42,6 +42,8 @@
 		61C756C62E65BDAC00B2B371 /* TVNCServiceCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 61C756B42E65BDAC00B2B371 /* TVNCServiceCoordinator.m */; };
 		61C756C72E65BDAC00B2B371 /* TVNCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61C756B62E65BDAC00B2B371 /* TVNCViewController.m */; };
 		61C756CE2E65BE6F00B2B371 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61C756CD2E65BE6F00B2B371 /* LaunchScreen.storyboard */; };
+		CC17D9BA2EC79DA1005C275A /* ZTSelfSignedCertificate.m in Sources */ = {isa = PBXBuildFile; fileRef = CC17D9B92EC79DA1005C275A /* ZTSelfSignedCertificate.m */; };
+		CC17D9BB2EC79DA1005C275A /* ZTSelfSignedCertificate.m in Sources */ = {isa = PBXBuildFile; fileRef = CC17D9B92EC79DA1005C275A /* ZTSelfSignedCertificate.m */; };
 		CC80617F2E74967500B1AA3E /* GitHubReleaseUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = CC80617D2E74967500B1AA3E /* GitHubReleaseUpdater.m */; };
 		CC8061802E74967500B1AA3E /* DpkgVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = CC80617B2E74967500B1AA3E /* DpkgVersion.m */; };
 		CC91EF902E6C2208002F5B2A /* TVNCClientListController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC91EF8F2E6C2208002F5B2A /* TVNCClientListController.m */; };
@@ -82,6 +84,8 @@
 		61C756D42E65BE9100B2B371 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		61C756D62E65BEA900B2B371 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		61C756D82E65BEA900B2B371 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		CC17D9B82EC79DA1005C275A /* ZTSelfSignedCertificate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZTSelfSignedCertificate.h; sourceTree = "<group>"; };
+		CC17D9B92EC79DA1005C275A /* ZTSelfSignedCertificate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZTSelfSignedCertificate.m; sourceTree = "<group>"; };
 		CC80617A2E74967500B1AA3E /* DpkgVersion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DpkgVersion.h; sourceTree = "<group>"; };
 		CC80617B2E74967500B1AA3E /* DpkgVersion.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DpkgVersion.m; sourceTree = "<group>"; };
 		CC80617C2E74967500B1AA3E /* GitHubReleaseUpdater.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GitHubReleaseUpdater.h; sourceTree = "<group>"; };
@@ -198,6 +202,8 @@
 				61B0DD072EB13BEF004CC42B /* TVNCSliderCell.m */,
 				61C756B52E65BDAC00B2B371 /* TVNCViewController.h */,
 				61C756B62E65BDAC00B2B371 /* TVNCViewController.m */,
+				CC17D9B82EC79DA1005C275A /* ZTSelfSignedCertificate.h */,
+				CC17D9B92EC79DA1005C275A /* ZTSelfSignedCertificate.m */,
 			);
 			path = TrollVNC;
 			sourceTree = "<group>";
@@ -358,6 +364,7 @@
 				61C756C22E65BDAC00B2B371 /* StripedTextTableViewController.m in Sources */,
 				61C756C32E65BDAC00B2B371 /* TaskProcess+ObjC.swift in Sources */,
 				61C756C42E65BDAC00B2B371 /* TVNCHotspotManager.m in Sources */,
+				CC17D9BB2EC79DA1005C275A /* ZTSelfSignedCertificate.m in Sources */,
 				61C756C52E65BDAC00B2B371 /* TVNCRootListController.m in Sources */,
 				CC91EF902E6C2208002F5B2A /* TVNCClientListController.m in Sources */,
 				61B0DD092EB13BEF004CC42B /* TVNCSliderCell.m in Sources */,
@@ -380,6 +387,7 @@
 				615401B62EB1180C009FDD6F /* StripedTextTableViewController.m in Sources */,
 				615401B72EB1180C009FDD6F /* TaskProcess+ObjC.swift in Sources */,
 				615401B82EB1180C009FDD6F /* TVNCHotspotManager.m in Sources */,
+				CC17D9BA2EC79DA1005C275A /* ZTSelfSignedCertificate.m in Sources */,
 				615401B92EB1180C009FDD6F /* TVNCRootListController.m in Sources */,
 				615401BA2EB1180C009FDD6F /* TVNCClientListController.m in Sources */,
 				61B0DD082EB13BEF004CC42B /* TVNCSliderCell.m in Sources */,
