@@ -130,6 +130,9 @@ static int gRepeaterId = 12345679;
 static BOOL gUserClientNotifsEnabled = YES;
 static BOOL gUserSingleNotifsEnabled = YES;
 
+// Blocked hosts (temporary blacklist)
+static NSMutableSet<NSString *> *gBlockedHosts = nil;
+
 NS_INLINE BOOL isRepeaterEnabled(void) {
     return gRepeaterMode > 0 && gRepeaterHost != NULL && gRepeaterHost[0] != '\0' && gRepeaterPort > 0;
 }
@@ -3705,7 +3708,7 @@ static NSData *tvCtlTSVForList(void) {
     return [out dataUsingEncoding:NSUTF8StringEncoding];
 }
 
-static BOOL tvDisconnectClientById(NSString *cid) {
+static BOOL tvDisconnectClientById(NSString *cid, BOOL addToBlocklist) {
     if (!cid || cid.length == 0 || !gScreen)
         return NO;
 
@@ -3714,19 +3717,42 @@ static BOOL tvDisconnectClientById(NSString *cid) {
     rfbClientIteratorPtr it = rfbGetClientIterator(gScreen);
     while ((cl = rfbClientIteratorNext(it))) {
         NSString *kid = tvGenerateClientId8(cl->sock);
-        if ([kid isEqualToString:cid]) {
-            found = YES;
-            rfbCloseClient(cl);
-            break;
+        if (![kid isEqualToString:cid]) {
+            continue;
         }
+
+        found = YES;
+
+        // Add to blocked hosts list if requested
+        if (addToBlocklist) {
+            do {
+                NSString *host = (cl && cl->host) ? [NSString stringWithUTF8String:cl->host] : @"";
+                if (!host.length) {
+                    break;
+                }
+
+                if (!gBlockedHosts) {
+                    gBlockedHosts = [[NSMutableSet alloc] init];
+                }
+
+                @synchronized(gBlockedHosts) {
+                    [gBlockedHosts addObject:host];
+                }
+
+                TVLog(@"Blocked host: %@", host);
+            } while (NO);
+        }
+
+        rfbCloseClient(cl);
+        break;
     }
 
     rfbReleaseClientIterator(it);
     return found;
 }
 
-static NSData *tvCtlTextForKick(NSString *cid) {
-    BOOL ok = tvDisconnectClientById(cid);
+static NSData *tvCtlTextForKick(NSString *cid, BOOL addToBlocklist) {
+    BOOL ok = tvDisconnectClientById(cid, addToBlocklist);
     const char *raw = ok ? "OK\n" : "NOT_FOUND\n";
     return [NSData dataWithBytes:raw length:strlen(raw)];
 }
@@ -3800,7 +3826,7 @@ void tvCtlHandleConnection(int cfd, struct sockaddr_in caddr) {
         tvCtlRemoveSubscriber(cfd, NO);
         const char *ok = "OK\n";
         resp = [NSData dataWithBytes:ok length:strlen(ok)];
-    } else if ([cmd hasPrefix:@"disconnect "] || [cmd hasPrefix:@"kick "]) {
+    } else if ([cmd hasPrefix:@"disconnect "] || [cmd hasPrefix:@"kick "] || [cmd hasPrefix:@"block "]) {
         NSArray *parts = [cmd componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         NSString *cid = parts.count >= 2 ? parts[1] : @"";
         if ([cid isEqualToString:@"ALL"]) {
@@ -3809,7 +3835,8 @@ void tvCtlHandleConnection(int cfd, struct sockaddr_in caddr) {
         } else if (cid.length != 8) {
             resp = [@"ERR InvalidID\n" dataUsingEncoding:NSUTF8StringEncoding];
         } else {
-            resp = tvCtlTextForKick(cid);
+            BOOL shouldBlock = [cmd hasPrefix:@"block "];
+            resp = tvCtlTextForKick(cid, shouldBlock);
         }
     } else {
         resp = [@"ERR Unknown\n" dataUsingEncoding:NSUTF8StringEncoding];
@@ -4459,6 +4486,19 @@ static void setupRfbEventHandlers(void) {
 }
 
 static rfbBool tvCheckPasswordByList(rfbClientPtr cl, const char *passwd, int len) {
+    // Check if client host is blocked
+    if (gBlockedHosts && cl && cl->host) {
+        NSString *host = [NSString stringWithUTF8String:cl->host];
+        BOOL isBlocked = NO;
+        @synchronized(gBlockedHosts) {
+            isBlocked = [gBlockedHosts containsObject:host];
+        }
+        if (isBlocked) {
+            TVLog(@"Rejected connection from blocked host: %@", host);
+            return FALSE; // Reject authentication
+        }
+    }
+
     rfbBool rc = rfbCheckPasswordByList(cl, passwd, len);
 
     TVClientState *st = tvGetClientState(cl);

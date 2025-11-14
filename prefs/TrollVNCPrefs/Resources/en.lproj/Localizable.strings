@@ -23,6 +23,12 @@
 "Are you sure you want to restart the VNC service?" = "Are you sure you want to restart the VNC service?";
 
 /* No comment provided by engineer. */
+"Block" = "Block";
+
+/* No comment provided by engineer. */
+"Block Client" = "Block Client";
+
+/* No comment provided by engineer. */
 "Cancel" = "Cancel";
 
 /* No comment provided by engineer. */
@@ -56,7 +62,7 @@
 "Disconnect All" = "Disconnect All";
 
 /* No comment provided by engineer. */
-"Disconnect Now" = "Disconnect Now";
+"Disconnect Client" = "Disconnect Client";
 
 /* No comment provided by engineer. */
 "Do you want to clear this log file “%@”?" = "Do you want to clear this log file “%@”?";

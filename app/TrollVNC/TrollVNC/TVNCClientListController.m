@@ -241,16 +241,17 @@ static int TVNCConnect(void) {
     [self reloadDataFromServer];
 }
 
-// Removed index-based disconnect; use -disconnectClientWithId: instead.
+// Removed index-based disconnect; use -disconnectClientWithId:block: instead.
 
-- (void)disconnectClientWithId:(NSString *)cid {
+- (void)disconnectClientWithId:(NSString *)cid block:(BOOL)shouldBlock {
     if (cid.length == 0)
         return;
 
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
         int fd = TVNCConnect();
         if (fd >= 0) {
-            TVNCSendLine(fd, [NSString stringWithFormat:@"disconnect %@", cid]);
+            NSString *cmd = shouldBlock ? @"block" : @"disconnect";
+            TVNCSendLine(fd, [NSString stringWithFormat:@"%@ %@", cmd, cid]);
             (void)TVNCReadAll(fd, 2.0);
             close(fd);
         }
@@ -440,19 +441,31 @@ static int TVNCConnect(void) {
         return nil;
 
     __weak typeof(self) weakSelf = self;
-    UIContextualAction *kick = [UIContextualAction
+
+    UIContextualAction *block = [UIContextualAction
         contextualActionWithStyle:UIContextualActionStyleDestructive
-                            title:NSLocalizedStringFromTableInBundle(@"Disconnect", @"Localizable", self.bundle, nil)
+                            title:NSLocalizedStringFromTableInBundle(@"Block", @"Localizable", self.bundle, nil)
                           handler:^(__kindof UIContextualAction *action, __kindof UIView *sourceView,
                                     void (^completionHandler)(BOOL)) {
                               NSString *cid = [weakSelf.dataSource itemIdentifierForIndexPath:indexPath] ?: @"";
-                              [weakSelf disconnectClientWithId:cid];
+                              [weakSelf disconnectClientWithId:cid block:YES];
                               if (completionHandler)
                                   completionHandler(YES);
                           }];
 
-    UISwipeActionsConfiguration *config = [UISwipeActionsConfiguration configurationWithActions:@[ kick ]];
-    config.performsFirstActionWithFullSwipe = YES;
+    UIContextualAction *kick = [UIContextualAction
+        contextualActionWithStyle:UIContextualActionStyleNormal
+                            title:NSLocalizedStringFromTableInBundle(@"Disconnect", @"Localizable", self.bundle, nil)
+                          handler:^(__kindof UIContextualAction *action, __kindof UIView *sourceView,
+                                    void (^completionHandler)(BOOL)) {
+                              NSString *cid = [weakSelf.dataSource itemIdentifierForIndexPath:indexPath] ?: @"";
+                              [weakSelf disconnectClientWithId:cid block:NO];
+                              if (completionHandler)
+                                  completionHandler(YES);
+                          }];
+
+    UISwipeActionsConfiguration *config = [UISwipeActionsConfiguration configurationWithActions:@[ block, kick ]];
+    config.performsFirstActionWithFullSwipe = NO;
     return config;
 }
 
@@ -503,15 +516,26 @@ static int TVNCConnect(void) {
                                          [gen notificationOccurred:UINotificationFeedbackTypeSuccess];
                                      }];
                          UIAction *disconnect = [UIAction
-                             actionWithTitle:NSLocalizedStringFromTableInBundle(@"Disconnect Now", @"Localizable",
+                             actionWithTitle:NSLocalizedStringFromTableInBundle(@"Disconnect Client", @"Localizable",
                                                                                 self.bundle, nil)
                                        image:[UIImage systemImageNamed:@"xmark.circle"]
                                   identifier:nil
                                      handler:^(__kindof UIAction *_Nonnull action) {
-                                         [self disconnectClientWithId:cid];
+                                         [self disconnectClientWithId:cid block:NO];
                                      }];
                          disconnect.attributes = UIMenuElementAttributesDestructive;
-                         return [UIMenu menuWithTitle:@"" children:@[ copyId, copyHost, disconnect ]];
+
+                         UIAction *block = [UIAction
+                             actionWithTitle:NSLocalizedStringFromTableInBundle(@"Block Client", @"Localizable",
+                                                                                self.bundle, nil)
+                                       image:[UIImage systemImageNamed:@"hand.raised.fill"]
+                                  identifier:nil
+                                     handler:^(__kindof UIAction *_Nonnull action) {
+                                         [self disconnectClientWithId:cid block:YES];
+                                     }];
+                         block.attributes = UIMenuElementAttributesDestructive;
+
+                         return [UIMenu menuWithTitle:@"" children:@[ copyId, copyHost, disconnect, block ]];
                      }];
 }
 
