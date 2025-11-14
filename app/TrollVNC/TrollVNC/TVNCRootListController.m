@@ -195,6 +195,9 @@ NS_INLINE NSString *TVNCGetEn0IPAddress(void) {
 @property(nonatomic, strong) UINotificationFeedbackGenerator *notificationGenerator;
 @property(nonatomic, strong) UIColor *primaryColor;
 @property(nonatomic, copy) NSString *jbrootPath;
+
+@property(nonatomic, strong) PSSpecifier *certSpecifier;
+@property(nonatomic, strong) PSSpecifier *keysSpecifier;
 @property(nonatomic, strong) PSSpecifier *exportCertSpecifier;
 
 @end
@@ -277,6 +280,13 @@ NS_INLINE NSString *TVNCGetEn0IPAddress(void) {
             if ([actionName isEqualToString:@"exportCertificate"]) {
                 self.exportCertSpecifier = specifier;
                 break;
+            }
+
+            NSString *keyName = [specifier propertyForKey:@"key"];
+            if ([keyName isEqualToString:@"SslCertFile"]) {
+                self.certSpecifier = specifier;
+            } else if ([keyName isEqualToString:@"SslKeyFile"]) {
+                self.keysSpecifier = specifier;
             }
         }
 
@@ -599,7 +609,7 @@ NS_INLINE NSString *TVNCGetEn0IPAddress(void) {
 }
 
 - (void)_reallyGenerateKeys {
-    NSString *randomUUID = [[[NSUUID UUID] UUIDString] substringFromIndex:24]; // 8 bytes
+    NSString *randomUUID = [[[NSUUID UUID] UUIDString] substringFromIndex:28];
     NSString *commonName = [NSString stringWithFormat:@"TrollVNC %@", randomUUID];
 
     ZTSelfSignedCertificate *ca = [ZTSelfSignedCertificate generateWithCommonName:commonName];
@@ -665,6 +675,11 @@ NS_INLINE NSString *TVNCGetEn0IPAddress(void) {
         return;
     }
 
+    [super setPreferenceValue:[self cacertPath] specifier:[self certSpecifier]];
+    [super setPreferenceValue:[self cakeyPath] specifier:[self keysSpecifier]];
+
+    [self reloadSpecifiers];
+
     NSString *title = NSLocalizedStringFromTableInBundle(@"Generation Succeeded", @"Localizable", self.bundle, nil);
     NSString *message = NSLocalizedStringFromTableInBundle(
         @"Self-signed CA certificate and private key have been generated successfully.", @"Localizable", self.bundle,
@@ -709,7 +724,8 @@ NS_INLINE NSString *TVNCGetEn0IPAddress(void) {
 - (void)_reallyResetDefaults {
     [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:@"com.82flex.trollvnc"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    [self reload];
+
+    [self reloadSpecifiers];
 }
 
 - (void)support {
