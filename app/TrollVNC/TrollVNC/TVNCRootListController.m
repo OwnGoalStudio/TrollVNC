@@ -499,6 +499,36 @@ NS_INLINE NSString *TVNCGetEn0IPAddress(void) {
     [self presentViewController:navController animated:YES completion:nil];
 }
 
+- (void)generateKeys {
+}
+
+- (void)resetDefaults {
+    NSString *title = NSLocalizedStringFromTableInBundle(@"Reset to Defaults", @"Localizable", self.bundle, nil);
+    NSString *message = NSLocalizedStringFromTableInBundle(
+        @"Are you sure you want to reset all settings to their defaults?", @"Localizable", self.bundle, nil);
+    NSString *cancel = NSLocalizedStringFromTableInBundle(@"Cancel", @"Localizable", self.bundle, nil);
+    NSString *reset = NSLocalizedStringFromTableInBundle(@"Reset", @"Localizable", self.bundle, nil);
+
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:cancel style:UIAlertActionStyleCancel handler:nil]];
+    __weak typeof(self) weakSelf = self;
+    [alert addAction:[UIAlertAction actionWithTitle:reset
+                                              style:UIAlertActionStyleDestructive
+                                            handler:^(UIAlertAction *_Nonnull action) {
+                                                [weakSelf _reallyResetDefaults];
+                                            }]];
+
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)_reallyResetDefaults {
+    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:@"com.82flex.trollvnc"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self reload];
+}
+
 - (void)support {
     NSURL *url = [NSURL URLWithString:@"https://havoc.app/search/82Flex"];
     if ([[UIApplication sharedApplication] canOpenURL:url]) {
@@ -529,14 +559,16 @@ NS_INLINE NSString *TVNCGetEn0IPAddress(void) {
         }
     }
 
-    NSInteger lastSection = groupCount - 2; // support group
+    NSInteger lastSection = groupCount - 3; // action group
     if (indexPath.section >= lastSection) {
         PSSpecifier *specifier = [self specifierAtIndexPath:indexPath];
         NSString *key = [specifier propertyForKey:@"cell"];
+        BOOL isDestructive =
+            ([specifier propertyForKey:@"isDestructive"] && [[specifier propertyForKey:@"isDestructive"] boolValue]);
         if ([key isEqualToString:@"PSButtonCell"]) {
             UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
-            cell.textLabel.textColor = self.primaryColor;
-            cell.textLabel.highlightedTextColor = self.primaryColor;
+            cell.textLabel.textColor = isDestructive ? [UIColor systemRedColor] : self.primaryColor;
+            cell.textLabel.highlightedTextColor = isDestructive ? [UIColor systemRedColor] : self.primaryColor;
             return cell;
         }
     }

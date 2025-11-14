@@ -20,6 +20,9 @@
 "Apply Changes" = "应用更改";
 
 /* No comment provided by engineer. */
+"Are you sure you want to reset all settings to their defaults?" = "你确定要将所有设置还原为默认值吗？";
+
+/* No comment provided by engineer. */
 "Are you sure you want to restart the VNC service?" = "确定要重启 VNC 服务吗？";
 
 /* No comment provided by engineer. */
@@ -90,6 +93,12 @@
 
 /* No comment provided by engineer. */
 "Repeater" = "中继器";
+
+/* No comment provided by engineer. */
+"Reset" = "还原";
+
+/* No comment provided by engineer. */
+"Reset to Defaults" = "还原为默认值";
 
 /* No comment provided by engineer. */
 "Restart" = "重启";

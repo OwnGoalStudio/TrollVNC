@@ -20,6 +20,9 @@
 "Apply Changes" = "Apply Changes";
 
 /* No comment provided by engineer. */
+"Are you sure you want to reset all settings to their defaults?" = "Are you sure you want to reset all settings to their defaults?";
+
+/* No comment provided by engineer. */
 "Are you sure you want to restart the VNC service?" = "Are you sure you want to restart the VNC service?";
 
 /* No comment provided by engineer. */
@@ -90,6 +93,12 @@
 
 /* No comment provided by engineer. */
 "Repeater" = "Repeater";
+
+/* No comment provided by engineer. */
+"Reset" = "Reset";
+
+/* No comment provided by engineer. */
+"Reset to Defaults" = "Reset to Defaults";
 
 /* No comment provided by engineer. */
 "Restart" = "Restart";

@@ -7,7 +7,7 @@
 	<key>items</key>
 	<array>
 
-		<!-- 0) General -->
+		<!-- General -->
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -29,7 +29,7 @@
 			<true/>
 		</dict>
 
-		<!-- 1) Desktop Name -->
+		<!-- Desktop Name -->
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -55,7 +55,7 @@
 			<string>alphabet</string>
 		</dict>
 
-		<!-- 2) TCP Port -->
+		<!-- TCP Port -->
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -85,7 +85,7 @@
 			<string>5901</string>
 		</dict>
 
-		<!-- 3) Full-access Password -->
+		<!-- Full-access Password -->
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -107,7 +107,7 @@
 			<string>8 characters max.</string>
 		</dict>
 
-		<!-- 4) View-only Password -->
+		<!-- View-only Password -->
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -129,7 +129,7 @@
 			<string>8 characters max.</string>
 		</dict>
 
-		<!-- 5) Clipboard Sync -->
+		<!-- Clipboard Sync -->
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -151,7 +151,7 @@
 			<true/>
 		</dict>
 
-		<!-- 6) View-only (global) -->
+		<!-- View-only (global) -->
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -173,7 +173,7 @@
 			<false/>
 		</dict>
 
-		<!-- 7.1) User Notifications -->
+		<!-- User Notifications -->
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -207,7 +207,7 @@
 			<true/>
 		</dict>
 
-		<!-- 7.2) Keep-Alive (sec) -->
+		<!-- Keep-Alive (sec) -->
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -235,7 +235,7 @@
 			<string>%.0fs</string>
 		</dict>
 
-		<!-- 8) Output Scale -->
+		<!-- Output Scale -->
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -263,7 +263,7 @@
 			<string>%.2f</string>
 		</dict>
 
-		<!-- 9) Frame Rate -->
+		<!-- Frame Rate -->
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -287,7 +287,7 @@
 			<true/>
 		</dict>
 
-		<!-- 10) Sync Orientation -->
+		<!-- Sync Orientation -->
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -309,7 +309,7 @@
 			<true/>
 		</dict>
 
-		<!-- 11) Natural Scroll Direction -->
+		<!-- Natural Scroll Direction -->
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -331,7 +331,7 @@
 			<false/>
 		</dict>
 
-		<!-- 12) Modifier Mapping -->
+		<!-- Modifier Mapping -->
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -372,7 +372,7 @@
 			<string>Standard: Alt as Option, Super as Command. On macOS clients, Alt as Command (altcmd) is recommended.</string>
 		</dict>
 
-		<!-- 13) Assistive Touch -->
+		<!-- Assistive Touch -->
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -394,7 +394,7 @@
 			<false/>
 		</dict>
 
-		<!-- 14) Server-Side Cursor -->
+		<!-- Server-Side Cursor -->
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -416,7 +416,7 @@
 			<false/>
 		</dict>
 
-		<!-- 15) Defer Window (sec) -->
+		<!-- Defer Window (sec) -->
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -444,7 +444,7 @@
 			<string>%.3fs</string>
 		</dict>
 
-		<!-- 16) Max In-flight -->
+		<!-- Max In-flight -->
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -474,7 +474,7 @@
 			<true/>
 		</dict>
 
-		<!-- 17) Tile Size (px) -->
+		<!-- Tile Size (px) -->
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -502,7 +502,7 @@
 			<string>%.0fpx</string>
 		</dict>
 
-		<!-- 18) Fullscreen Threshold (%) -->
+		<!-- Fullscreen Threshold (%) -->
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -530,7 +530,7 @@
 			<string>%.0f%%</string>
 		</dict>
 
-		<!-- 19) Max Rects -->
+		<!-- Max Rects -->
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -556,7 +556,7 @@
 			<true/>
 		</dict>
 
-		<!-- 20) Non-blocking Swap -->
+		<!-- Non-blocking Swap -->
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -578,7 +578,7 @@
 			<false/>
 		</dict>
 
-		<!-- 21.1) Wheel Step (px) -->
+		<!-- Wheel Step (px) -->
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -606,7 +606,7 @@
 			<string>%.0fpx</string>
 		</dict>
 
-		<!-- 21.2) Wheel Tuning (advanced) -->
+		<!-- Wheel Tuning (advanced) -->
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -630,7 +630,7 @@
 			<true/>
 		</dict>
 
-		<!-- 22) HTTP Port (advanced) -->
+		<!-- HTTP Port (advanced) -->
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -658,7 +658,7 @@
 			<string>0</string>
 		</dict>
 
- 		<!-- 23) HTTP Document Root (advanced) -->
+ 		<!-- HTTP Document Root (advanced) -->
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -682,7 +682,7 @@
 			<true/>
 		</dict>
 
-		<!-- 24) SSL Certificate File (advanced) -->
+		<!-- SSL Certificate File (advanced) -->
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -706,7 +706,7 @@
 			<true/>
 		</dict>
 
-		<!-- 25) SSL Private Key File (advanced) -->
+		<!-- SSL Private Key File (advanced) -->
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -730,7 +730,7 @@
 			<true/>
 		</dict>
 
-		<!-- 26.1) Reverse Connection -->
+		<!-- Reverse Connection -->
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -806,7 +806,7 @@
 			<string>0</string>
 		</dict>
 
-		<!-- 26.2) Bonjour / Auto-Discovery -->
+		<!-- Bonjour / Auto-Discovery -->
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -828,7 +828,7 @@
 			<true/>
 		</dict>
 
-		<!-- 27) Log Keyboard Events (debug) -->
+		<!-- Log Keyboard Events (debug) -->
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -850,7 +850,35 @@
 			<false/>
 		</dict>
 
-		<!-- Source code section -->
+		<!-- Quick Action -->
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string></string>
+			<key>footerText</key>
+			<string>To unblock previously blocked clients, restart the VNC service. The temporary block list is cleared on service restart.</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>label</key>
+			<string>Generate Keys…</string>
+			<key>action</key>
+			<string>generateKeys</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>label</key>
+			<string>Reset to Defaults</string>
+			<key>action</key>
+			<string>resetDefaults</string>
+			<key>isDestructive</key>
+			<true/>
+		</dict>
+
+		<!-- Source Code -->
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
