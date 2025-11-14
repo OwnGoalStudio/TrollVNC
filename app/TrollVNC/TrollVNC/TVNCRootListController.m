@@ -17,8 +17,10 @@
 
 #import <Foundation/Foundation.h>
 #import <Preferences/PSSpecifier.h>
+#import <SystemConfiguration/SystemConfiguration.h>
 #import <UIKit/UIKit.h>
 #import <arpa/inet.h>
+#import <dlfcn.h>
 #import <ifaddrs.h>
 #import <net/if.h>
 #import <signal.h>
@@ -104,18 +106,56 @@ NS_INLINE void TVNCRestartVNCService(void) {
     });
 }
 
+NS_INLINE NSString *GetDefaultRouteInterface(void) {
+    static SCDynamicStoreRef (*_SCDynamicStoreCreate)(CFAllocatorRef, CFStringRef, SCDynamicStoreCallBack,
+                                                      SCDynamicStoreContext *) = NULL;
+    static CFPropertyListRef (*_SCDynamicStoreCopyValue)(SCDynamicStoreRef, CFStringRef) = NULL;
+
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        void *handle =
+            dlopen("/System/Library/Frameworks/SystemConfiguration.framework/SystemConfiguration", RTLD_LAZY);
+        if (handle) {
+            _SCDynamicStoreCreate =
+                (SCDynamicStoreRef (*)(CFAllocatorRef, CFStringRef, SCDynamicStoreCallBack,
+                                       SCDynamicStoreContext *))dlsym(handle, "SCDynamicStoreCreate");
+            _SCDynamicStoreCopyValue =
+                (CFPropertyListRef (*)(SCDynamicStoreRef, CFStringRef))dlsym(handle, "SCDynamicStoreCopyValue");
+        }
+    });
+
+    if (!_SCDynamicStoreCreate || !_SCDynamicStoreCopyValue) {
+        return nil;
+    }
+
+    SCDynamicStoreRef store = _SCDynamicStoreCreate(NULL, CFSTR("RouteInfo"), NULL, NULL);
+    if (!store)
+        return nil;
+
+    NSDictionary *dict =
+        (NSDictionary *)CFBridgingRelease(_SCDynamicStoreCopyValue(store, CFSTR("State:/Network/Global/IPv4")));
+    if (!dict[@"PrimaryInterface"])
+        dict = (NSDictionary *)CFBridgingRelease(_SCDynamicStoreCopyValue(store, CFSTR("State:/Network/Global/IPv6")));
+    CFRelease(store);
+
+    return dict[@"PrimaryInterface"];
+}
+
 // Resolve current IPv4/IPv6 address of interface en0 (Wi‑Fi). Prefer IPv4 if available.
 NS_INLINE NSString *TVNCGetEn0IPAddress(void) {
     struct ifaddrs *ifaList = NULL;
     if (getifaddrs(&ifaList) != 0 || !ifaList)
         return nil;
 
+    NSString *defaultRouteInterface = GetDefaultRouteInterface();
+    const char *defaultRouteIfName = defaultRouteInterface ? [defaultRouteInterface UTF8String] : "en0";
+
     NSString *ipv4 = nil;
     NSString *ipv6 = nil;
     for (struct ifaddrs *ifa = ifaList; ifa; ifa = ifa->ifa_next) {
         if (!ifa->ifa_addr || !ifa->ifa_name)
             continue;
-        if (strcmp(ifa->ifa_name, "en0") != 0)
+        if (strcmp(ifa->ifa_name, defaultRouteIfName) != 0)
             continue;
         if (!(ifa->ifa_flags & IFF_UP) || (ifa->ifa_flags & IFF_LOOPBACK))
             continue;
