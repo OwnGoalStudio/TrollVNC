@@ -682,7 +682,7 @@ NS_INLINE NSString *TVNCGetEn0IPAddress(void) {
 
     NSString *title = NSLocalizedStringFromTableInBundle(@"Generation Succeeded", @"Localizable", self.bundle, nil);
     NSString *message = NSLocalizedStringFromTableInBundle(
-        @"Self-signed CA certificate and private key have been generated successfully.", @"Localizable", self.bundle,
+        @"The self-signed CA certificate and private key have been successfully generated. You need to trust this certificate in your client browser or operating system. Restart the service to apply the changes.", @"Localizable", self.bundle,
         nil);
     NSString *ok = NSLocalizedStringFromTableInBundle(@"OK", @"Localizable", self.bundle, nil);
 

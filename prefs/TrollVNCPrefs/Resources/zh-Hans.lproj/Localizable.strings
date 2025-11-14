@@ -134,7 +134,7 @@
 "Reverse Connection: %@" = "反向连接：%@";
 
 /* No comment provided by engineer. */
-"Self-signed CA certificate and private key have been generated successfully." = "自签名 CA 证书和私钥已成功生成。";
+"The self-signed CA certificate and private key have been successfully generated. You need to trust this certificate in your client browser or operating system. Restart the service to apply the changes." = "自签名 CA 证书和私钥已成功生成。你需要在客户端浏览器或操作系统中信任此证书。重启服务以使更改生效。";
 
 /* No comment provided by engineer. */
 "Skip This Version" = "跳过此版本";

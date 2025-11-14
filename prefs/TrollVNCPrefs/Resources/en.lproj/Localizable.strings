@@ -134,7 +134,7 @@
 "Reverse Connection: %@" = "Reverse Connection: %@";
 
 /* No comment provided by engineer. */
-"Self-signed CA certificate and private key have been generated successfully." = "Self-signed CA certificate and private key have been generated successfully.";
+"The self-signed CA certificate and private key have been successfully generated. You need to trust this certificate in your client browser or operating system. Restart the service to apply the changes." = "The self-signed CA certificate and private key have been successfully generated. You need to trust this certificate in your client browser or operating system. Restart the service to apply the changes.";
 
 /* No comment provided by engineer. */
 "Skip This Version" = "Skip This Version";
