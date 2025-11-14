@@ -3861,6 +3861,13 @@ static void tvPublishClientConnectedNotif(NSString *host) {
     if (!gUserClientNotifsEnabled || isRepeaterEnabled() || !host || host.length == 0)
         return;
 
+    // Check if host is a loopback address
+    if ([host isEqualToString:@"127.0.0.1"] || [host isEqualToString:@"::1"] || [host isEqualToString:@"localhost"] ||
+        [host hasPrefix:@"127."] || [host hasPrefix:@"::ffff:127."]) {
+        TVLog(@"Skipping notification for loopback connection from %@", host);
+        return;
+    }
+
     BulletinManager *mgr = [BulletinManager sharedManager];
 
     NSDictionary *userInfo = @{
