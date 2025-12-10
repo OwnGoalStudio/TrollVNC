@@ -38,6 +38,7 @@ trollvncserver -p 5901 -n "My iPhone" [options]
 
 **Basic**:
 
+- `-b host`   Bind host address (IPv4/IPv6 literal, default to all interfaces)
 - `-p port`   TCP port for VNC (default: `5901`)
 - `-c port`   TCP port for client management (listening on localhost only; `0` disables, default: `0`)
 - `-n name`   Desktop name shown to clients (default: `TrollVNC`)
