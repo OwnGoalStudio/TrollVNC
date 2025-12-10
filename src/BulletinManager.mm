@@ -82,7 +82,8 @@
 #endif
 
     if (@available(iOS 15.0, *)) {
-        content.interruptionLevel = UNNotificationInterruptionLevelPassive;
+        if ([content respondsToSelector:@selector(setInterruptionLevel:)])
+            content.interruptionLevel = UNNotificationInterruptionLevelPassive;
     }
 
     if (mSingleNotificationIdentifier) {
@@ -112,7 +113,8 @@
     content.sound = [UNNotificationSound defaultSound];
 
     if (@available(iOS 15.0, *)) {
-        content.interruptionLevel = UNNotificationInterruptionLevelActive;
+        if ([content respondsToSelector:@selector(setInterruptionLevel:)])
+            content.interruptionLevel = UNNotificationInterruptionLevelActive;
     }
 
     NSString *uuidString = [[NSUUID UUID] UUIDString];
