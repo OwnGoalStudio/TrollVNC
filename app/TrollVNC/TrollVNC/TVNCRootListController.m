@@ -480,6 +480,10 @@ NS_INLINE NSString *TVNCGetEn0IPAddress(void) {
                 // Found the jailbreak root
                 break;
             }
+            if ([rootPath hasPrefix:@"/private/preboot/"] && [rootPath hasSuffix:@"/jb"]) {
+                // Found the jailbreak root (NathanLR)
+                break;
+            }
             if ([rootPath isEqualToString:@"/"] || !rootPath.length) {
                 // Reached the root without finding jailbreak root
                 break;
