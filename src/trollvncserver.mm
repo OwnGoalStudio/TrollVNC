@@ -684,10 +684,6 @@ static void parseDaemonOptions(void) {
         if (![httpDir hasPrefix:@"/"]) {
             TVLog(@"-daemon: HttpDir must be absolute: %@ (ignored)", httpDir);
         } else {
-            if (gHttpDirOverride) {
-                free(gHttpDirOverride);
-                gHttpDirOverride = NULL;
-            }
             gHttpDirOverride = strdup(httpDir.fileSystemRepresentation);
         }
     }
@@ -696,10 +692,6 @@ static void parseDaemonOptions(void) {
         if (![sslCert hasPrefix:@"/"]) {
             TVLog(@"-daemon: SslCertFile must be absolute: %@ (ignored)", sslCert);
         } else {
-            if (gSslCertPath) {
-                free(gSslCertPath);
-                gSslCertPath = NULL;
-            }
             gSslCertPath = strdup(sslCert.fileSystemRepresentation);
         }
     }
@@ -708,10 +700,6 @@ static void parseDaemonOptions(void) {
         if (![sslKey hasPrefix:@"/"]) {
             TVLog(@"-daemon: SslKeyFile must be absolute: %@ (ignored)", sslKey);
         } else {
-            if (gSslKeyPath) {
-                free(gSslKeyPath);
-                gSslKeyPath = NULL;
-            }
             gSslKeyPath = strdup(sslKey.fileSystemRepresentation);
         }
     }
@@ -779,10 +767,6 @@ static void parseDaemonOptions(void) {
         // Backward-compat: accept separate ReverseHost/ReversePort if present
         NSString *revHost = [prefs objectForKey:@"ReverseHost"];
         if ([revHost isKindOfClass:[NSString class]] && revHost.length > 0) {
-            if (gRepeaterHost) {
-                free(gRepeaterHost);
-                gRepeaterHost = NULL;
-            }
             gRepeaterHost = strdup(revHost.UTF8String);
         }
         NSNumber *revPortN = [prefs objectForKey:@"ReversePort"];
@@ -1373,15 +1357,7 @@ static void parseCLI(int argc, const char *argv[]) {
                 TVPrintError("Invalid httpDir path for -D: %s (must be absolute)", path);
                 exit(EXIT_FAILURE);
             }
-            if (gHttpDirOverride) {
-                free(gHttpDirOverride);
-                gHttpDirOverride = NULL;
-            }
             gHttpDirOverride = strdup(path);
-            if (!gHttpDirOverride) {
-                TVPrintError("Failed to duplicate httpDir path");
-                exit(EXIT_FAILURE);
-            }
             TVLog(@"CLI: HTTP dir override set to %s (-D)", path);
             break;
         }
@@ -1391,15 +1367,7 @@ static void parseCLI(int argc, const char *argv[]) {
                 TVPrintError("Invalid value for -e (sslcertfile)");
                 exit(EXIT_FAILURE);
             }
-            if (gSslCertPath) {
-                free(gSslCertPath);
-                gSslCertPath = NULL;
-            }
             gSslCertPath = strdup(path);
-            if (!gSslCertPath) {
-                TVPrintError("Failed to duplicate sslcertfile path");
-                exit(EXIT_FAILURE);
-            }
             TVLog(@"CLI: SSL cert file set (-e %s)", path);
             break;
         }
@@ -1409,15 +1377,7 @@ static void parseCLI(int argc, const char *argv[]) {
                 TVPrintError("Invalid value for -k (sslkeyfile)");
                 exit(EXIT_FAILURE);
             }
-            if (gSslKeyPath) {
-                free(gSslKeyPath);
-                gSslKeyPath = NULL;
-            }
             gSslKeyPath = strdup(path);
-            if (!gSslKeyPath) {
-                TVPrintError("Failed to duplicate sslkeyfile path");
-                exit(EXIT_FAILURE);
-            }
             TVLog(@"CLI: SSL key file set (-k %s)", path);
             break;
         }
@@ -1984,10 +1944,6 @@ NS_INLINE void maybeResizeFramebufferForRotation(int rotQ) {
     void *newFront = calloc(1, newFBSize);
     void *newBack = calloc(1, newFBSize);
     if (!newFront || !newBack) {
-        if (newFront)
-            free(newFront);
-        if (newBack)
-            free(newBack);
         TVPrintError("Failed to allocate required frame buffers");
         exit(EXIT_FAILURE);
     }
@@ -4536,27 +4492,15 @@ static void setupRfbClassicAuthentication(void) {
         // Vector size = number of passwords + 1 for NULL terminator
         int vecCount = fullCount + viewCount + 1;
         gAuthPasswdVec = (char **)calloc((size_t)vecCount, sizeof(char *));
-        if (!gAuthPasswdVec) {
-            TVPrintError("Failed to allocate memory for password vector");
-            exit(EXIT_FAILURE);
-        }
 
         int idx = 0;
         if (fullCount) {
             gAuthPasswdStr = strdup(envPwd);
-            if (!gAuthPasswdStr) {
-                TVPrintError("Failed to allocate memory for full-access password");
-                exit(EXIT_FAILURE);
-            }
             gAuthPasswdVec[idx++] = gAuthPasswdStr;
         }
 
         if (viewCount) {
             gAuthViewOnlyPasswdStr = strdup(envViewPwd);
-            if (!gAuthViewOnlyPasswdStr) {
-                TVPrintError("Failed to allocate memory for view-only password");
-                exit(EXIT_FAILURE);
-            }
             gAuthPasswdVec[idx++] = gAuthViewOnlyPasswdStr;
         }
 
@@ -4629,13 +4573,9 @@ static void setupRfbHttpServer(void) {
 
     // SSL certificate and key (optional)
     if (gSslCertPath && *gSslCertPath) {
-        if (gScreen->sslcertfile)
-            free(gScreen->sslcertfile);
         gScreen->sslcertfile = strdup(gSslCertPath);
     }
     if (gSslKeyPath && *gSslKeyPath) {
-        if (gScreen->sslkeyfile)
-            free(gScreen->sslkeyfile);
         gScreen->sslkeyfile = strdup(gSslKeyPath);
     }
 }
