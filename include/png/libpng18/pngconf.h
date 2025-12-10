@@ -1,6 +1,6 @@
 /* pngconf.h - machine-configurable file for libpng
  *
- * libpng version 1.6.51.git
+ * libpng version 1.8.0.git
  *
  * Copyright (c) 2018-2025 Cosmin Truta
  * Copyright (c) 1998-2002,2004,2006-2016,2018 Glenn Randers-Pehrson
@@ -93,46 +93,20 @@
 #  define PNGARG(arglist) arglist
 #endif
 
-/* Function calling conventions.
- * =============================
- * Normally it is not necessary to specify to the compiler how to call
- * a function - it just does it - however on x86 systems derived from
- * Microsoft and Borland C compilers ('IBM PC', 'DOS', 'Windows' systems
- * and some others) there are multiple ways to call a function and the
- * default can be changed on the compiler command line.  For this reason
- * libpng specifies the calling convention of every exported function and
- * every function called via a user supplied function pointer.  This is
- * done in this file by defining the following macros:
- *
- * PNGAPI    Calling convention for exported functions.
- * PNGCBAPI  Calling convention for user provided (callback) functions.
- * PNGCAPI   Calling convention used by the ANSI-C library (required
- *           for longjmp callbacks and sometimes used internally to
- *           specify the calling convention for zlib).
- *
- * These macros should never be overridden.  If it is necessary to
- * change calling convention in a private build this can be done
- * by setting PNG_API_RULE (which defaults to 0) to one of the values
- * below to select the correct 'API' variants.
- *
- * PNG_API_RULE=0 Use PNGCAPI - the 'C' calling convention - throughout.
- *                This is correct in every known environment.
- * PNG_API_RULE=1 Use the operating system convention for PNGAPI and
- *                the 'C' calling convention (from PNGCAPI) for
- *                callbacks (PNGCBAPI).  This is no longer required
- *                in any known environment - if it has to be used
- *                please post an explanation of the problem to the
- *                libpng mailing list.
- *
- * These cases only differ if the operating system does not use the C
- * calling convention, at present this just means the above cases
- * (x86 DOS/Windows systems) and, even then, this does not apply to
- * Cygwin running on those systems.
- *
- * Note that the value must be defined in pnglibconf.h so that what
- * the application uses to call the library matches the conventions
- * set when building the library.
+/* The PNGAPI, PNGCAPI and PNGCBAPI macros were used in versions of libpng
+ * prior to 1.8.0 to allow the use of custom calling conventions on x86 systems
+ * like DOS, OS/2 and Windows, for interoperability with non-C compilers like
+ * the pre-Delphi Borland Pascal and the pre-.NET Visual Basic.  [Deprecated.]
  */
+#ifndef PNGCAPI
+#  define PNGCAPI
+#endif
+#ifndef PNGCBAPI
+#  define PNGCBAPI PNGCAPI
+#endif
+#ifndef PNGAPI
+#  define PNGAPI PNGCAPI
+#endif
 
 /* Symbol export
  * =============
@@ -175,78 +149,15 @@
  * ==========================
  * This code is used at build time to find PNG_IMPEXP, the API settings
  * and PNG_EXPORT_TYPE(), it may also set a macro to indicate the DLL
- * import processing is possible.  On Windows systems it also sets
- * compiler-specific macros to the values required to change the calling
- * conventions of the various functions.
+ * import processing is possible.
  */
 #if defined(_WIN32) || defined(__WIN32__) || defined(__NT__) || \
     defined(__CYGWIN__)
-  /* Windows system (DOS doesn't support DLLs).  Includes builds under Cygwin or
-   * MinGW on any architecture currently supported by Windows.  Also includes
-   * Watcom builds but these need special treatment because they are not
-   * compatible with GCC or Visual C because of different calling conventions.
-   */
-#  if PNG_API_RULE == 2
-   /* If this line results in an error, either because __watcall is not
-    * understood or because of a redefine just below you cannot use *this*
-    * build of the library with the compiler you are using.  *This* build was
-    * build using Watcom and applications must also be built using Watcom!
-    */
-#    define PNGCAPI __watcall
-#  endif
-
-#  if defined(__GNUC__) || (defined(_MSC_VER) && (_MSC_VER >= 800))
-#    define PNGCAPI __cdecl
-#    if PNG_API_RULE == 1
-   /* If this line results in an error __stdcall is not understood and
-    * PNG_API_RULE should not have been set to '1'.
-    */
-#      define PNGAPI __stdcall
-#    endif
-#  else
-   /* An older compiler, or one not detected (erroneously) above,
-    * if necessary override on the command line to get the correct
-    * variants for the compiler.
-    */
-#    ifndef PNGCAPI
-#      define PNGCAPI _cdecl
-#    endif
-#    if PNG_API_RULE == 1 && !defined(PNGAPI)
-#      define PNGAPI _stdcall
-#    endif
-#  endif /* compiler/api */
-
-  /* NOTE: PNGCBAPI always defaults to PNGCAPI. */
-
-#  if defined(PNGAPI) && !defined(PNG_USER_PRIVATEBUILD)
-#     error PNG_USER_PRIVATEBUILD must be defined if PNGAPI is changed
-#  endif
-
 #  define PNG_DLL_EXPORT __declspec(dllexport)
 #  ifndef PNG_DLL_IMPORT
 #    define PNG_DLL_IMPORT __declspec(dllimport)
 #  endif
-
-#else /* !Windows */
-#  if (defined(__IBMC__) || defined(__IBMCPP__)) && defined(__OS2__)
-#    define PNGAPI _System
-#  else /* !Windows/x86 && !OS/2 */
-   /* Use the defaults, or define PNG*API on the command line (but
-    * this will have to be done for every compile!)
-    */
-#  endif /* other system, !OS/2 */
-#endif /* !Windows/x86 */
-
-/* Now do all the defaulting . */
-#ifndef PNGCAPI
-#  define PNGCAPI
-#endif
-#ifndef PNGCBAPI
-#  define PNGCBAPI PNGCAPI
-#endif
-#ifndef PNGAPI
-#  define PNGAPI PNGCAPI
-#endif
+#endif /* Windows */
 
 /* PNG_IMPEXP may be set on the compilation system command line or (if not set)
  * then in an internal header file when building the library, otherwise (when
@@ -278,14 +189,9 @@
 #  define PNG_EXPORT_TYPE(type) PNG_IMPEXP type
 #endif
 
-   /* The ordinal value is only relevant when preprocessing png.h for symbol
-    * table entries, so we discard it here.  See the .dfn files in the
-    * scripts directory.
-    */
-
 #ifndef PNG_EXPORTA
-#  define PNG_EXPORTA(ordinal, type, name, args, attributes) \
-      PNG_FUNCTION(PNG_EXPORT_TYPE(type), (PNGAPI name), args, \
+#  define PNG_EXPORTA(type, name, args, attributes) \
+      PNG_FUNCTION(PNG_EXPORT_TYPE(type), (name), args, \
       PNG_LINKAGE_API attributes)
 #endif
 
@@ -294,16 +200,15 @@
  */
 #define PNG_EMPTY /*empty list*/
 
-#define PNG_EXPORT(ordinal, type, name, args) \
-   PNG_EXPORTA(ordinal, type, name, args, PNG_EMPTY)
+#define PNG_EXPORT(type, name, args) PNG_EXPORTA(type, name, args, PNG_EMPTY)
 
 /* Use PNG_REMOVED to comment out a removed interface. */
 #ifndef PNG_REMOVED
-#  define PNG_REMOVED(ordinal, type, name, args, attributes)
+#  define PNG_REMOVED(type, name, args, attributes)
 #endif
 
 #ifndef PNG_CALLBACK
-#  define PNG_CALLBACK(type, name, args) type (PNGCBAPI name) args
+#  define PNG_CALLBACK(type, name, args) type (name) args
 #endif
 
 /* Support for compiler specific function attributes.  These are used
@@ -434,18 +339,16 @@
 
 #ifndef PNG_FP_EXPORT     /* A floating point API. */
 #  ifdef PNG_FLOATING_POINT_SUPPORTED
-#     define PNG_FP_EXPORT(ordinal, type, name, args)\
-         PNG_EXPORT(ordinal, type, name, args);
+#     define PNG_FP_EXPORT(type, name, args) PNG_EXPORT(type, name, args);
 #  else                   /* No floating point APIs */
-#     define PNG_FP_EXPORT(ordinal, type, name, args)
+#     define PNG_FP_EXPORT(type, name, args)
 #  endif
 #endif
 #ifndef PNG_FIXED_EXPORT  /* A fixed point API. */
 #  ifdef PNG_FIXED_POINT_SUPPORTED
-#     define PNG_FIXED_EXPORT(ordinal, type, name, args)\
-         PNG_EXPORT(ordinal, type, name, args);
+#     define PNG_FIXED_EXPORT(type, name, args) PNG_EXPORT(type, name, args);
 #  else                   /* No fixed point APIs */
-#     define PNG_FIXED_EXPORT(ordinal, type, name, args)
+#     define PNG_FIXED_EXPORT(type, name, args)
 #  endif
 #endif
 
@@ -560,46 +463,47 @@ typedef ptrdiff_t png_ptrdiff_t;
  */
 typedef png_int_32 png_fixed_point;
 
-/* Add typedefs for pointers */
-typedef void                  * png_voidp;
-typedef const void            * png_const_voidp;
-typedef png_byte              * png_bytep;
-typedef const png_byte        * png_const_bytep;
-typedef png_uint_32           * png_uint_32p;
-typedef const png_uint_32     * png_const_uint_32p;
-typedef png_int_32            * png_int_32p;
-typedef const png_int_32      * png_const_int_32p;
-typedef png_uint_16           * png_uint_16p;
-typedef const png_uint_16     * png_const_uint_16p;
-typedef png_int_16            * png_int_16p;
-typedef const png_int_16      * png_const_int_16p;
-typedef char                  * png_charp;
-typedef const char            * png_const_charp;
-typedef png_fixed_point       * png_fixed_point_p;
-typedef const png_fixed_point * png_const_fixed_point_p;
-typedef size_t                * png_size_tp;
-typedef const size_t          * png_const_size_tp;
+/* [Deprecated] */
+typedef void                  *png_voidp;
+typedef const void            *png_const_voidp;
+typedef png_byte              *png_bytep;
+typedef const png_byte        *png_const_bytep;
+typedef png_uint_32           *png_uint_32p;
+typedef const png_uint_32     *png_const_uint_32p;
+typedef png_int_32            *png_int_32p;
+typedef const png_int_32      *png_const_int_32p;
+typedef png_uint_16           *png_uint_16p;
+typedef const png_uint_16     *png_const_uint_16p;
+typedef png_int_16            *png_int_16p;
+typedef const png_int_16      *png_const_int_16p;
+typedef char                  *png_charp;
+typedef const char            *png_const_charp;
+typedef png_fixed_point       *png_fixed_point_p;
+typedef const png_fixed_point *png_const_fixed_point_p;
+typedef size_t                *png_size_tp;
+typedef const size_t          *png_const_size_tp;
 
 #ifdef PNG_FLOATING_POINT_SUPPORTED
-typedef double       * png_doublep;
-typedef const double * png_const_doublep;
+/* [Deprecated] */
+typedef double       *png_doublep;
+typedef const double *png_const_doublep;
 #endif
 
-/* Pointers to pointers; i.e. arrays */
-typedef png_byte        * * png_bytepp;
-typedef png_uint_32     * * png_uint_32pp;
-typedef png_int_32      * * png_int_32pp;
-typedef png_uint_16     * * png_uint_16pp;
-typedef png_int_16      * * png_int_16pp;
-typedef const char      * * png_const_charpp;
-typedef char            * * png_charpp;
-typedef png_fixed_point * * png_fixed_point_pp;
+/* [Deprecated] */
+typedef png_byte        **png_bytepp;
+typedef png_uint_32     **png_uint_32pp;
+typedef png_int_32      **png_int_32pp;
+typedef png_uint_16     **png_uint_16pp;
+typedef png_int_16      **png_int_16pp;
+typedef const char      **png_const_charpp;
+typedef char            **png_charpp;
+typedef png_fixed_point **png_fixed_point_pp;
 #ifdef PNG_FLOATING_POINT_SUPPORTED
-typedef double          * * png_doublepp;
+typedef double          **png_doublepp;
 #endif
 
-/* Pointers to pointers to pointers; i.e., pointer to array */
-typedef char            * * * png_charppp;
+/* [Deprecated] */
+typedef char ***png_charppp;
 
 #ifdef PNG_STDIO_SUPPORTED
 /* With PNG_STDIO_SUPPORTED it was possible to use I/O streams that were
@@ -607,7 +511,8 @@ typedef char            * * * png_charppp;
  * before Win32 and Windows CE applications before WinCE 3.0, but that kind
  * of support has long been discontinued.
  */
-typedef FILE            * png_FILE_p; /* [Deprecated] */
+/* [Deprecated] */
+typedef FILE *png_FILE_p;
 #endif
 
 #endif /* PNG_BUILDING_SYMBOL_TABLE */

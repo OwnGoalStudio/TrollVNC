@@ -65,7 +65,7 @@ else
 trollvncserver_LIBRARIES += crypto
 trollvncserver_LIBRARIES += lzo2
 trollvncserver_LIBRARIES += turbojpeg
-trollvncserver_LIBRARIES += png16
+trollvncserver_LIBRARIES += png18
 trollvncserver_LIBRARIES += sasl2
 trollvncserver_LIBRARIES += ssl
 trollvncserver_LIBRARIES += vncserver
