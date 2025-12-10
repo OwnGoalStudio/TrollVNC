@@ -476,6 +476,7 @@ TrollVNC can be preconfigured via a bundled `Managed.plist` for supervised or fl
 
 - Strings:
   - `DesktopName`: Desktop name shown to clients
+  - `BindHost`: IPv4/IPv6 address literal to bind
   - `ModifierMap`: `std` | `altcmd`
   - `FrameRateSpec`: e.g., `"60"`, `"30-60"`, or `"30:60:120"`
   - `WheelTuning`: advanced wheel tuning string, e.g., `"amp=0.25,cap=1.0,max=256,clamp=3.0"`
