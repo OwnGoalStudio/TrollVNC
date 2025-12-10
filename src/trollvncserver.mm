@@ -296,8 +296,8 @@ static void printUsageAndExit(const char *prog) {
     fprintf(stderr, "Usage: %s [-p port] [-n name] [options]\n\n", prog);
 
     fprintf(stderr, "Basic:\n");
+    fprintf(stderr, "  -b host    Bind host address (IPv4/IPv6 literal, default to all)\n");
     fprintf(stderr, "  -p port    VNC TCP port (default: %d)\n", gPort);
-    fprintf(stderr, "  -b host    Bind host address (IPv4/IPv6 literal)\n");
     fprintf(stderr, "  -c port    Client management TCP port (0=off, default: 0)\n");
     fprintf(stderr, "  -n name    Desktop name (default: %s)\n", [gDesktopName UTF8String]);
     fprintf(stderr, "  -v         View-only (ignore input)\n");
