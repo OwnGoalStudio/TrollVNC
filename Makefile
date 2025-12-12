@@ -1,4 +1,4 @@
-export PACKAGE_VERSION := 2.8-2
+export PACKAGE_VERSION := 3.0
 export THEOS_PACKAGE_SCHEME
 
 ifeq ($(THEOS_DEVICE_SIMULATOR),1)
@@ -117,6 +117,7 @@ endif
 include $(THEOS_MAKE_PATH)/tool.mk
 
 SUBPROJECTS += prefs/TrollVNCPrefs
+SUBPROJECTS += prefs/CCTrollVNC
 
 ifeq ($(THEBOOTSTRAP),1)
 SUBPROJECTS += app/TrollVNC
