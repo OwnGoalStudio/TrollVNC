@@ -44,6 +44,7 @@
 		61C756CE2E65BE6F00B2B371 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61C756CD2E65BE6F00B2B371 /* LaunchScreen.storyboard */; };
 		CC17D9BA2EC79DA1005C275A /* ZTSelfSignedCertificate.m in Sources */ = {isa = PBXBuildFile; fileRef = CC17D9B92EC79DA1005C275A /* ZTSelfSignedCertificate.m */; };
 		CC17D9BB2EC79DA1005C275A /* ZTSelfSignedCertificate.m in Sources */ = {isa = PBXBuildFile; fileRef = CC17D9B92EC79DA1005C275A /* ZTSelfSignedCertificate.m */; };
+		CC1BF93E2F101B2F00111D96 /* SpringBoardServices.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC1BF93D2F101B2F00111D96 /* SpringBoardServices.tbd */; };
 		CC80617F2E74967500B1AA3E /* GitHubReleaseUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = CC80617D2E74967500B1AA3E /* GitHubReleaseUpdater.m */; };
 		CC8061802E74967500B1AA3E /* DpkgVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = CC80617B2E74967500B1AA3E /* DpkgVersion.m */; };
 		CC91EF902E6C2208002F5B2A /* TVNCClientListController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC91EF8F2E6C2208002F5B2A /* TVNCClientListController.m */; };
@@ -86,6 +87,7 @@
 		61C756D82E65BEA900B2B371 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		CC17D9B82EC79DA1005C275A /* ZTSelfSignedCertificate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZTSelfSignedCertificate.h; sourceTree = "<group>"; };
 		CC17D9B92EC79DA1005C275A /* ZTSelfSignedCertificate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZTSelfSignedCertificate.m; sourceTree = "<group>"; };
+		CC1BF93D2F101B2F00111D96 /* SpringBoardServices.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; path = SpringBoardServices.tbd; sourceTree = "<group>"; };
 		CC80617A2E74967500B1AA3E /* DpkgVersion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DpkgVersion.h; sourceTree = "<group>"; };
 		CC80617B2E74967500B1AA3E /* DpkgVersion.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DpkgVersion.m; sourceTree = "<group>"; };
 		CC80617C2E74967500B1AA3E /* GitHubReleaseUpdater.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GitHubReleaseUpdater.h; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				61C756672E65B72E00B2B371 /* NetworkExtension.framework in Frameworks */,
+				CC1BF93E2F101B2F00111D96 /* SpringBoardServices.tbd in Frameworks */,
 				61C756BE2E65BDAC00B2B371 /* Preferences.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -156,6 +159,7 @@
 			children = (
 				61C756A82E65BDAC00B2B371 /* Preferences.tbd */,
 				615401AC2EB117FC009FDD6F /* Preferences.Sim.tbd */,
+				CC1BF93D2F101B2F00111D96 /* SpringBoardServices.tbd */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
