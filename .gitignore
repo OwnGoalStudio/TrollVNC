@@ -3,6 +3,7 @@
 compile_commands.json
 /packages
 /refs
+prefs/TrollVNCPrefs/Resources/Managed.plist
 
 # Created by https://www.toptal.com/developers/gitignore/api/macos,xcode,swift
 # Edit at https://www.toptal.com/developers/gitignore?templates=macos,xcode,swift
