@@ -19,6 +19,7 @@
 #import "TrollVNC-Swift.h"
 
 #import <Foundation/Foundation.h>
+#import <MobileCoreServices/LSApplicationProxy.h>
 #import <arpa/inet.h>
 #import <netinet/in.h>
 #import <sys/socket.h>
@@ -192,6 +193,15 @@ int SBSLaunchApplicationWithIdentifierAndURLAndLaunchOptions(CFStringRef bundleI
         }
     } else if ([configVal isKindOfClass:[NSString class]]) {
         appId = (NSString *)configVal;
+    } else if ([configVal isKindOfClass:[NSArray class]]) {
+        NSArray *appIds = (NSArray *)configVal;
+        for (NSString *candidateAppId in appIds) {
+            LSApplicationProxy *appProxy = [LSApplicationProxy applicationProxyForIdentifier:candidateAppId];
+            if (![appProxy isInstalled]) {
+                continue;
+            }
+            appId = candidateAppId;
+        }
     }
 
     if (!appId) {
