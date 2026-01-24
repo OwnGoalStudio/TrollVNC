@@ -76,19 +76,8 @@ void CARenderServerRenderDisplay(kern_return_t a, CFStringRef b, IOSurfaceRef su
 
     int width, height;
     CGSize screenSize = [[UIScreen mainScreen] _unjailedReferenceBoundsInPixels].size;
-
-#if !TARGET_IPHONE_SIMULATOR
-    BOOL isPad = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad);
-    if (isPad) {
-        width = (int)round(screenSize.height);
-        height = (int)round(screenSize.width);
-    } else {
-#endif
-        width = (int)round(screenSize.width);
-        height = (int)round(screenSize.height);
-#if !TARGET_IPHONE_SIMULATOR
-    }
-#endif
+    width = (int)round(screenSize.width);
+    height = (int)round(screenSize.height);
 
     // Pixel format for Alpha, Red, Green and Blue
     unsigned pixelFormat = 0x42475241; // 'ARGB'

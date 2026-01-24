@@ -4408,16 +4408,6 @@ NS_INLINE UIInterfaceOrientation makeInterfaceOrientationRotate90(UIInterfaceOri
 
 // Map UIInterfaceOrientation to rotation quadrant (clockwise degrees/90)
 NS_INLINE int rotationForOrientation(UIInterfaceOrientation o) {
-#if !TARGET_IPHONE_SIMULATOR
-    static BOOL sIsPad;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sIsPad = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad);
-    });
-    if (sIsPad) {
-        o = makeInterfaceOrientationRotate90(o);
-    }
-#endif
     switch (o) {
     case UIInterfaceOrientationPortrait:
     default:

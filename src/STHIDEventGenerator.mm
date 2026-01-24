@@ -160,16 +160,7 @@ NS_INLINE void _DTXCalcLinearPinchStartEndPoints(CGRect bounds, CGFloat pixelsSc
         return nil;
 
     CGSize screenSize = [[UIScreen mainScreen] _unjailedReferenceBoundsInPixels].size;
-#if !TARGET_IPHONE_SIMULATOR
-    BOOL isPad = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad);
-    if (isPad) {
-        _physicalScreenSize = CGSizeMake(screenSize.height, screenSize.width);
-    } else {
-#endif
-        _physicalScreenSize = CGSizeMake(screenSize.width, screenSize.height);
-#if !TARGET_IPHONE_SIMULATOR
-    }
-#endif
+    _physicalScreenSize = screenSize;
 
     dispatch_queue_attr_t attr = dispatch_queue_attr_make_with_qos_class(DISPATCH_QUEUE_SERIAL_WITH_AUTORELEASE_POOL,
                                                                          QOS_CLASS_USER_INTERACTIVE, 0);
