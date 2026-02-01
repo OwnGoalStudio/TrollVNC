@@ -161,8 +161,12 @@ NS_INLINE void _DTXCalcLinearPinchStartEndPoints(CGRect bounds, CGFloat pixelsSc
 
     CGSize screenSize = [[UIScreen mainScreen] _unjailedReferenceBoundsInPixels].size;
 #if !TARGET_IPHONE_SIMULATOR
+    BOOL isAbove17 = NO;
+    if (@available(iOS 17.0, *)) {
+        isAbove17 = YES;
+    }
     BOOL isPad = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad);
-    if (isPad) {
+    if (isPad && !isAbove17) {
         _physicalScreenSize = CGSizeMake(screenSize.height, screenSize.width);
     } else {
 #endif

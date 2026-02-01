@@ -78,8 +78,12 @@ void CARenderServerRenderDisplay(kern_return_t a, CFStringRef b, IOSurfaceRef su
     CGSize screenSize = [[UIScreen mainScreen] _unjailedReferenceBoundsInPixels].size;
 
 #if !TARGET_IPHONE_SIMULATOR
+    BOOL isAbove17 = NO;
+    if (@available(iOS 17.0, *)) {
+        isAbove17 = YES;
+    }
     BOOL isPad = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad);
-    if (isPad) {
+    if (isPad && !isAbove17) {
         width = (int)round(screenSize.height);
         height = (int)round(screenSize.width);
     } else {

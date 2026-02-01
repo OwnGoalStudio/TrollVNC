@@ -2994,7 +2994,13 @@ NS_INLINE CGPoint vncPointToDevicePoint(int vx, int vy) {
     static BOOL sIsPad = NO;
     static dispatch_once_t sPadOnce;
     dispatch_once(&sPadOnce, ^{
-        sIsPad = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad);
+        BOOL isAbove17 = NO;
+        if (@available(iOS 17.0, *)) {
+            isAbove17 = YES;
+        }
+        if (!isAbove17) {
+            sIsPad = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad);
+        }
     });
     int effRotQ = (rotQ + (sIsPad ? 3 : 0)) & 3;
 #else
@@ -4409,10 +4415,16 @@ NS_INLINE UIInterfaceOrientation makeInterfaceOrientationRotate90(UIInterfaceOri
 // Map UIInterfaceOrientation to rotation quadrant (clockwise degrees/90)
 NS_INLINE int rotationForOrientation(UIInterfaceOrientation o) {
 #if !TARGET_IPHONE_SIMULATOR
-    static BOOL sIsPad;
+    static BOOL sIsPad = NO;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sIsPad = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad);
+        BOOL isAbove17 = NO;
+        if (@available(iOS 17.0, *)) {
+            isAbove17 = YES;
+        }
+        if (!isAbove17) {
+            sIsPad = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad);
+        }
     });
     if (sIsPad) {
         o = makeInterfaceOrientationRotate90(o);
