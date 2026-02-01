@@ -23,6 +23,7 @@
 #import <mach/mach_time.h>
 #import <objc/runtime.h>
 
+#import "Control.h"
 #import "IOKitSPI.h"
 #import "Logging.h"
 #import "STHIDEventGenerator.h"
@@ -161,12 +162,7 @@ NS_INLINE void _DTXCalcLinearPinchStartEndPoints(CGRect bounds, CGFloat pixelsSc
 
     CGSize screenSize = [[UIScreen mainScreen] _unjailedReferenceBoundsInPixels].size;
 #if !TARGET_IPHONE_SIMULATOR
-    BOOL isAbove17 = NO;
-    if (@available(iOS 17.0, *)) {
-        isAbove17 = YES;
-    }
-    BOOL isPad = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad);
-    if (isPad && !isAbove17) {
+    if (gShouldApplyOrientationFix) {
         _physicalScreenSize = CGSizeMake(screenSize.height, screenSize.width);
     } else {
 #endif

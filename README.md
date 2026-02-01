@@ -505,7 +505,7 @@ TrollVNC can be preconfigured via a bundled `Managed.plist` for supervised or fl
   - `ReverseRepeaterID` (numeric ID for UltraVNC Repeater Mode II)
 
 - Booleans:
-  - `Enabled`, `ClipboardEnabled`, `ViewOnly`, `OrientationSync`, `NaturalScroll`, `ServerCursor`, `AsyncSwap`, `KeyLogging`, `AutoAssistEnabled`, `BonjourEnabled`, `FileTransferEnabled`, `SingleNotifEnabled`, `ClientNotifsEnabled`
+  - `Enabled`, `ClipboardEnabled`, `ViewOnly`, `OrientationSync`, `OrientationPadFix`, `NaturalScroll`, `ServerCursor`, `AsyncSwap`, `KeyLogging`, `AutoAssistEnabled`, `BonjourEnabled`, `FileTransferEnabled`, `SingleNotifEnabled`, `ClientNotifsEnabled`
 
 - `LaunchAtLogin`: `true` | `false` | custom app ID (e.g., `com.zqbb.Dopamine-roothide`)
   - Whether to start TrollVNC at login; if set to a custom app ID, it launches that app instead.
@@ -631,6 +631,7 @@ In the workflow-managed build, the following keys are fixed to safe defaults:
 - `ClientNotifsEnabled=true`
 - `KeepAliveSec=15`
 - `OrientationSync=true`
+- `OrientationPadFix=false`
 - `NaturalScroll=false`
 - `AutoAssistEnabled=false`
 - `ServerCursor=false`

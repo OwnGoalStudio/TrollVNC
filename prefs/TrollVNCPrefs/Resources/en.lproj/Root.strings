@@ -142,7 +142,7 @@
 
 "Reverse Connection" = "Reverse Connection";
 
-"Rotate the shared display to follow device orientation changes." = "Rotate the shared display to follow device orientation changes.";
+"Rotate the shared display to follow device orientation changes. “Apply Orientation Fix” may help with some iPad models that have uncommon default orientations." = "Rotate the shared display to follow device orientation changes. “Apply Orientation Fix” may help with some iPad models that have uncommon default orientations.";
 
 "Scroll & Input" = "Scroll & Input";
 
@@ -185,6 +185,8 @@
 "step=48,coalesce=0.03,..." = "step=48,coalesce=0.03,...";
 
 "Sync Interface Orientation" = "Sync Interface Orientation";
+
+"Apply Orientation Fix" = "Apply Orientation Fix";
 
 "Syncs text clipboard with VNC clients while connected. Disable if you do not want remote clipboard access." = "Syncs text clipboard with VNC clients while connected. Disable if you do not want remote clipboard access.";
 

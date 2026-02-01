@@ -15,5 +15,9 @@
  along with this program. If not, see <https://www.gnu.org/licenses/>.
 */
 
+#import <Foundation/Foundation.h>
+
+FOUNDATION_EXTERN BOOL gShouldApplyOrientationFix;
+
 static const int kTvAlivePort = 46751;
 static const int kTvDefaultCtlPort = 46752;

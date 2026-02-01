@@ -294,7 +294,7 @@
 			<key>label</key>
 			<string></string>
 			<key>footerText</key>
-			<string>Rotate the shared display to follow device orientation changes.</string>
+			<string>Rotate the shared display to follow device orientation changes. “Apply Orientation Fix” may help with some iPad models that have uncommon default orientations.</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -307,6 +307,18 @@
 			<string>Sync Interface Orientation</string>
 			<key>default</key>
 			<true/>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>defaults</key>
+			<string>com.82flex.trollvnc</string>
+			<key>key</key>
+			<string>OrientationPadFix</string>
+			<key>label</key>
+			<string>Apply Orientation Fix</string>
+			<key>default</key>
+			<false/>
 		</dict>
 
 		<!-- Natural Scroll Direction -->

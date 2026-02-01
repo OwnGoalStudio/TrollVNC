@@ -142,7 +142,7 @@
 
 "Reverse Connection" = "反向连接";
 
-"Rotate the shared display to follow device orientation changes." = "跟随设备方向变化旋转共享画面。";
+"Rotate the shared display to follow device orientation changes. “Apply Orientation Fix” may help with some iPad models that have uncommon default orientations." = "跟随设备方向变化旋转共享画面。“修正界面方向” 可能对某些默认方向不常见的 iPad 型号有帮助。";
 
 "Scroll & Input" = "滚动与输入";
 
@@ -185,6 +185,8 @@
 "step=48,coalesce=0.03,..." = "step=48,coalesce=0.03,...";
 
 "Sync Interface Orientation" = "同步界面方向";
+
+"Apply Orientation Fix" = "修正界面方向";
 
 "Syncs text clipboard with VNC clients while connected. Disable if you do not want remote clipboard access." = "连接期间与 VNC 客户端同步文本剪贴板。如不希望远程访问剪贴板，请关闭。";
 
