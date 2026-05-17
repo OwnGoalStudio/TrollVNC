@@ -2115,12 +2115,12 @@ NS_INLINE int ensureRotateScratch(size_t w, size_t h) {
 
 NS_INLINE int ensureScaleTemp(size_t srcW, size_t srcH, size_t dstW, size_t dstH, vImage_Flags flags) {
     vImage_Buffer s = {.data = NULL,
-                       .width = (vImagePixelCount)srcW,
                        .height = (vImagePixelCount)srcH,
+                       .width = (vImagePixelCount)srcW,
                        .rowBytes = srcW * (size_t)gBytesPerPixel};
     vImage_Buffer d = {.data = NULL,
-                       .width = (vImagePixelCount)dstW,
                        .height = (vImagePixelCount)dstH,
+                       .width = (vImagePixelCount)dstW,
                        .rowBytes = dstW * (size_t)gBytesPerPixel};
     vImage_Error need = vImageScale_ARGB8888(&s, &d, NULL, flags | kvImageGetTempBufferSize);
     if (need < 0)

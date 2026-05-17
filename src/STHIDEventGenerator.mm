@@ -550,7 +550,12 @@ static void _sendHIDEvent(IOHIDEventRef eventRef, dispatch_queue_t queue) {
     if (eventRef) {
         IOHIDEventRef strongEvent = (IOHIDEventRef)CFRetain(eventRef);
         dispatch_async(queue, ^{
-            IOHIDEventSetSenderID(strongEvent, 0x8000000817319372);
+            // 0xDEFACEDBEEFFECE5: Outdated value that doesn't work anymore
+            // 0x000000010000027F: Voice-Over Only?
+            // 0x000000010000052E: iOS 14.x works
+            // 0x8000000817319371: iOS 9+
+            // 0x8000000817319372: iOS 14.8 to 26 works
+            IOHIDEventSetSenderID(strongEvent, 0x8000000817319371);
             IOHIDEventSystemClientDispatchEvent(_ioSystemClient, strongEvent);
 
             CFRelease(strongEvent);
