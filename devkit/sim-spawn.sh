@@ -38,5 +38,11 @@ fi
 echo "Logs: $STDOUT_LOG"
 echo "      $STDERR_LOG"
 
-SIMCTL_CHILD_TROLLVNC_SANDBOX_PATH="$SANDBOX_PATH" xcrun simctl spawn "$REAL_SIMULATOR_ID" "$BINARY" -daemon \
+SERVER_ARGS=("$@")
+if [ "$#" -eq 0 ]; then
+    SERVER_ARGS=(-daemon)
+fi
+
+SIMCTL_CHILD_TROLLVNC_SANDBOX_PATH="$SANDBOX_PATH" xcrun simctl spawn "$REAL_SIMULATOR_ID" "$BINARY" \
+    "${SERVER_ARGS[@]}" \
     > >(tee "$STDOUT_LOG") 2> >(tee "$STDERR_LOG" >&2)
