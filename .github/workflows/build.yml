@@ -63,6 +63,12 @@ on:
         required: false
         default: ""
 
+permissions:
+  contents: write
+  actions: read
+
+run-name: Build TrollVNC ${{ github.ref_name }} #${{ github.run_number }}
+
 env:
   FINALPACKAGE: 1
   HOMEBREW_NO_AUTO_UPDATE: 1
@@ -194,20 +200,28 @@ jobs:
           path: release-packages
           merge-multiple: true
 
+      - name: List downloaded packages
+        run: |
+          find release-packages -type f -maxdepth 5 -print || true
+
       - name: Create release tag
         id: tag
         run: |
-          # Read PACKAGE_VERSION from Makefile
+          # Use a unique tag per workflow run so rebuilt custom icons are easy to find.
           PACKAGE_VERSION=$(grep 'PACKAGE_VERSION' Makefile | cut -d' ' -f4)
-          TAG_NAME="v$PACKAGE_VERSION"
+          TAG_NAME="custom-icon-v${PACKAGE_VERSION}-${GITHUB_RUN_NUMBER}"
           echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ steps.tag.outputs.tag_name }}
-          name: Release ${{ steps.tag.outputs.tag_name }}
-          body_path: CHANGELOG.md
+          name: TrollVNC Custom Icon ${{ steps.tag.outputs.tag_name }}
+          body: |
+            Custom TrollVNC build from `${{ github.sha }}`.
+
+            Download the `.tipa` from `packages-bootstrap` for TrollStore/bootstrap-style install.
+            Other schemes produce `.deb` packages.
           files: release-packages/**/*
           draft: false
           prerelease: false
