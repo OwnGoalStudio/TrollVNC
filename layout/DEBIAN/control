@@ -1,9 +1,9 @@
 Package: com.82flex.trollvnc
-Name: TrollVNC
+Name: MewRemote
 Version: 1.0
 Section: Tweaks
 Depends: firmware (>= 14.0), preferenceloader
 Architecture: iphoneos-arm
 Author: 82Flex <82flex@gmail.com>
 Maintainer: 82Flex <82flex@gmail.com>
-Description: TrollVNC is a VNC server for iOS devices, allowing remote access and control of the device’s screen.
+Description: MewRemote is a VNC server for iOS devices, allowing remote access and control of the device’s screen.

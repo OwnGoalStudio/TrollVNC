@@ -28,7 +28,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [[TVNCServiceCoordinator sharedCoordinator] registerServiceMonitor];
-    [[TVNCHotspotManager sharedManager] registerWithName:@"TrollVNC"];
+    [[TVNCHotspotManager sharedManager] registerWithName:@"MewRemote"];
 
 #ifdef THEBOOTSTRAP
     // Initialize Auto Updater

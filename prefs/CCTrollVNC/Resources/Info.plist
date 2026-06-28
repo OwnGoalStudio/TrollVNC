@@ -5,7 +5,7 @@
 		<key>CFBundleName</key>
 		<string>CCTrollVNC</string>
 		<key>CFBundleDisplayName</key>
-		<string>TrollVNC</string>
+		<string>MewRemote</string>
 		<key>CFBundleExecutable</key>
 		<string>CCTrollVNC</string>
 		<key>CFBundleIdentifier</key>

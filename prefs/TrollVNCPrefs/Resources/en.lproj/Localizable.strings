@@ -158,10 +158,10 @@
 "There is %d active VNC client." = "There is %d active VNC client.";
 
 /* No comment provided by engineer. */
-"TrollVNC" = "TrollVNC";
+"TrollVNC" = "MewRemote";
 
 /* No comment provided by engineer. */
-"TrollVNC (%@) v%@" = "TrollVNC (%@) v%@";
+"TrollVNC (%@) v%@" = "MewRemote (%@) v%@";
 
 /* No comment provided by engineer. */
 "unavailable" = "unavailable";

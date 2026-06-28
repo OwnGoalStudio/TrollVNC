@@ -68,7 +68,7 @@ static BOOL gEnabled = YES;
 static int gPort = 5901;
 static int gTvCtlPort = 0;        // port for control connections (0 = disabled)
 static NSString *gBindHost = nil; // optional bind address from CLI/config
-static NSString *gDesktopName = @"TrollVNC";
+static NSString *gDesktopName = @"MewRemote";
 static BOOL gViewOnly = NO;
 static double gKeepAliveSec = 0.0; // 15..86400
 static BOOL gClipboardEnabled = YES;
@@ -1141,7 +1141,7 @@ static void parseCLI(int argc, const char *argv[]) {
             break;
         }
         case 'n': {
-            gDesktopName = [NSString stringWithUTF8String:optarg ?: "TrollVNC"];
+            gDesktopName = [NSString stringWithUTF8String:optarg ?: "MewRemote"];
             TVLog(@"CLI: Desktop name set to '%@'", gDesktopName);
             break;
         }
@@ -3328,7 +3328,7 @@ static NSString *tvBootHash8(void) {
 
 // Compose Bonjour service name as gDesktopName + 8-char boot hash, clamped to 63 bytes
 static NSString *tvBonjourServiceName(NSString *baseName) {
-    NSString *name = baseName ?: @"TrollVNC";
+    NSString *name = baseName ?: @"MewRemote";
     NSString *suffix = tvBootHash8();
     // mDNS single-label length limit is 63 bytes (UTF-8). We reserve suffix bytes.
     const NSUInteger maxBytes = 63;

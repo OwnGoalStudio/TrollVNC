@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>title</key>
-	<string>TrollVNC</string>
+	<string>MewRemote</string>
 	<key>items</key>
 	<array>
 
@@ -48,7 +48,7 @@
 			<key>label</key>
 			<string>Desktop Name</string>
 			<key>default</key>
-			<string>TrollVNC</string>
+			<string>MewRemote</string>
 			<key>placeholder</key>
 			<string>Shown to VNC clients</string>
 			<key>keyboard</key>

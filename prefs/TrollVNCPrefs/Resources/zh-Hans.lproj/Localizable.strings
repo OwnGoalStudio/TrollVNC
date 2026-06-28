@@ -158,10 +158,10 @@
 "There is %d active VNC client." = "有 %d 个活动的 VNC 客户端。";
 
 /* No comment provided by engineer. */
-"TrollVNC" = "TrollVNC";
+"TrollVNC" = "MewRemote";
 
 /* No comment provided by engineer. */
-"TrollVNC (%@) v%@" = "TrollVNC (%@) v%@";
+"TrollVNC (%@) v%@" = "MewRemote (%@) v%@";
 
 /* No comment provided by engineer. */
 "unavailable" = "不可用";
