@@ -1,4 +1,4 @@
-name: Build TrollVNC
+name: Build MewRemote
 
 on:
   push:
@@ -14,7 +14,7 @@ on:
         type: string
         description: Desktop name shown to clients
         required: false
-        default: TrollVNC
+        default: MewRemote
       port:
         type: string
         description: VNC TCP port (1024–65535; default 5901)
@@ -67,7 +67,7 @@ permissions:
   contents: write
   actions: read
 
-run-name: Build TrollVNC ${{ github.ref_name }} #${{ github.run_number }}
+run-name: Build MewRemote ${{ github.ref_name }} #${{ github.run_number }}
 
 env:
   FINALPACKAGE: 1
@@ -216,9 +216,9 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ steps.tag.outputs.tag_name }}
-          name: TrollVNC Custom Icon ${{ steps.tag.outputs.tag_name }}
+          name: MewRemote Custom Icon ${{ steps.tag.outputs.tag_name }}
           body: |
-            Custom TrollVNC build from `${{ github.sha }}`.
+            Custom MewRemote build from `${{ github.sha }}`.
 
             Download the `.tipa` from `packages-bootstrap` for TrollStore/bootstrap-style install.
             Other schemes produce `.deb` packages.

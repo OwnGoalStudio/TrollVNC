@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>title</key>
-	<string>TrollVNC</string>
+	<string>MewRemote</string>
 	<key>items</key>
 	<array>
 
@@ -21,7 +21,7 @@
 			<key>label</key>
 			<string></string>
 			<key>footerText</key>
-			<string>This TrollVNC instance is managed by your organization.</string>
+			<string>This MewRemote instance is managed by your organization.</string>
 		</dict>
 
 	</array>

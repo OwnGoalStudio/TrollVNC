@@ -73,7 +73,7 @@
 #if !TARGET_IPHONE_SIMULATOR
     UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
 
-    content.title = @"TrollVNC";
+    content.title = @"MewRemote";
     content.body = messageContent;
     content.categoryIdentifier = @BANNER_CATEGORY;
     content.threadIdentifier = mSectionIdentifier;
@@ -108,7 +108,7 @@
 #if !TARGET_IPHONE_SIMULATOR
     UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
 
-    content.title = @"TrollVNC";
+    content.title = @"MewRemote";
     content.body = messageContent;
     content.categoryIdentifier = @BANNER_CATEGORY;
     content.threadIdentifier = mSectionIdentifier;

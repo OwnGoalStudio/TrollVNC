@@ -214,7 +214,7 @@
 
 "To unblock previously blocked clients, restart the VNC service. The temporary block list is cleared on service restart." = "要解封之前被封禁的客户端，请重启 VNC 服务。临时封禁列表会在服务重启时清空。";
 
-"TrollVNC" = "TrollVNC";
+"TrollVNC" = "MewRemote";
 
 "UltraVNC Repeater" = "UltraVNC 中继器";
 
